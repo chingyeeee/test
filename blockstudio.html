@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>前端工程師測試設計稿2022</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/blockstudio.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.js">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TimelineMax.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.6/ScrollMagic.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.6/plugins/animation.gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.1.1/gsap.min.js"></script>
+</head>
+
+<body>
+  <div id="blockstudio">
+    <header class="mainHeader">
+      <div class="headerWrap">
+        <div class="logo">
+          <a href="#">
+            <img src="img/blackLogo.svg" alt="logo">
+          </a>
+        </div>
+        <nav class="webNav">
+          <ul class="mainNav">
+            <li class="navHome">
+              <a href="#">Home</a>
+            </li>
+            <li>
+              <a href="#">Website</a>
+            </li>
+            <li>
+              <a href="#">Branding</a>
+            </li>
+          </ul>
+          <div class="hb" @click="hb">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </nav>
+      </div>
+      <nav class="hbNav">
+        <div class="navClose" @click="hb">
+          <span></span>
+          <span></span>
+        </div>
+        <ul>
+          <li>
+            <a href="#">About</a>
+          </li>
+          <li>
+            <a href="#">Website</a>
+          </li>
+          <li>
+            <a href="#">Branding</a>
+          </li>
+        </ul>
+        <footer>
+          <div class="footerContent">
+            <div class="contact">
+              <div class="bs phone">T. 02-2885-8586</div>
+              <div class="bs email">E. info@blockstudio.tw</div>
+              <div class="bs address">3F., No2, Ln.80, Sec.4, Chengde.Rd., Shilin Dist., Taipei City 111, Taiwan</div>
+            </div>
+            <div class="social">
+              <a href="#"><img src="img/facebook.svg" alt="facebook"></a>
+              <a href="#"><img src="img/instagram.svg" alt="instagram"></a>
+              <a href="#"><img src="img/youtube.svg" alt="youtube"></a>
+            </div>
+          </div>
+        </footer>
+      </nav>
+    </header>
+    <section class="slideShow">
+      <div class="carousel-wrap" ref="carousel" data-auto="true" data-delay="3000" data-dots="true"
+        @mouseenter.stop="toggleTimer = false" @mouseleave.stop="toggleTimer = true" @touchstart.stop="touchStart"
+        @touchmove.stop="touchMove" :style="'min-height:' + minHeight ">
+
+        <!-- carousel items-->
+        <keep-alive>
+          <transition :name="carouselName">
+
+            <ul class="item" v-for="(s, i) in carousels" v-if="show == i" :key="i">
+              <div class="slide">
+                <img :src="s.img" />
+              </div>
+              <div class="itemContent">
+                <h1 class="title">{{s.h1}}</h1>
+                <p class="detail">{{s.p}}</p>
+              </div>
+            </ul>
+
+          </transition>
+        </keep-alive>
+        <!-- button: dot-->
+        <div class="dot-group" v-if="dots">
+          <li v-for="(l, i) in len" :class="{ 'active': show == i }" @click.prevent="show = i">
+          </li>
+        </div>
+      </div>
+      <div class="aboutBs">
+        <div class="copyright">Block Studio © Copyright. All Rights Reserved.</div>
+        <div class="contactUs">
+          <a href="#"><img src="img/blackFacebook.svg" alt="facebook"></a>
+          <a href="#"><img src="img/blackInstagram.svg" alt="instagram"></a>
+          <a href="#"><img src="img/blackYoutube.svg" alt="youtube"></a>
+        </div>
+      </div>
+    </section>
+    <section class="home">
+      <h1 class="title">Home</h1>
+      <p class="homeDetail">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam natus neque, hic laboriosam
+        sapiente recusandae ipsam mollitia cumque fugit quis consequuntur quia velit minima voluptatem delectus vitae
+        facere quam minus corporis. Sunt cumque unde asperiores, dolore rerum exercitationem, officia eaque doloribus
+        minus cupiditate quis voluptates atque incidunt eligendi amet. Consequuntur hic illum, ex sequi accusamus odio
+        nihil harum, rerum ratione nemo veniam voluptatem sed quidem nostrum.</p>
+      <p class="homeDetail">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae laborum ad exercitationem illo eligendi
+        voluptates saepe molestias eum nesciunt sit, sint quasi asperiores modi facere voluptatem alias voluptatibus
+        aspernatur veniam cumque reiciendis iste quam, reprehenderit doloremque. Id qui, quisquam dicta eius ab eveniet
+        deserunt sint numquam necessitatibus minus tempore repellendus odio vero eum explicabo facere aspernatur quaerat
+        ratione autem sunt illo ex in nulla. Culpa et impedit reprehenderit quasi maxime similique molestias, architecto
+        reiciendis expedita ratione omnis consequuntur nesciunt deleniti quam optio consequatur excepturi quod
+        repellendus sed necessitatibus sequi aspernatur. Id beatae consequatur asperiores eligendi facilis possimus
+        corrupti, quas, architecto totam dignissimos error eos in necessitatibus pariatur reiciendis iste natus ex
+        sapiente! Eligendi quam obcaecati voluptates blanditiis vitae maxime esse facere ipsum rem? Reiciendis eos
+        fugiat id numquam voluptatum officia eum totam hic?
+      </p>
+      <div class="video">
+        <img src="https://picsum.photos/400/200/?random=99" alt="videoCover">
+        <button class="play" @click="playYoutube"></button>
+        <div class="videoBg" v-if="youtube">
+          <div class="videoContainer">
+            <button class="close" @click="closeYoutube"></button>
+            <iframe src="https://www.youtube.com/embed/FcRq4QqVWKg" frameborder="0" allowfullscreen="true"></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="cardSection">
+        <div class="card first">
+          <div class="cardChild cardTitle block">
+            <h2>Award Winning civil contractors that government</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus modi.</p>
+            <div class="arrow"></div>
+          </div>
+          <div class="cardChild cardTitle block">
+            <h2>Award Winning civil contractors that government</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus modi.</p>
+            <div class="arrow"></div>
+          </div>
+          <div class="cardChild cardTitle block">
+            <h2>Award Winning civil contractors that government</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus modi.</p>
+            <div class="arrow"></div>
+          </div>
+          <div class="cardChild cardDetail one">
+            <div class="awardPic">
+              <img src="https://picsum.photos/300/300/?random=10" alt="awardPic">
+            </div>
+            <div class="award">
+              <div class="tag">Award</div>
+              <h3 class="awardTitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
+              <p class="awardP">Lorem ipsum dolor sit.</p>
+              <div class="cardFooter">
+                <div class="client">
+                  <div class="head">CLIENT</div>
+                  <div class="clientDetail">ACT Government</div>
+                </div>
+                <div class="status">
+                  <div class="head">STATUS</div>
+                  <div class="statusDetail">Completed 2017</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cardChild cardDetail middle">
+            <div class="awardPic">
+              <img src="https://picsum.photos/300/300/?random=9" alt="awardPic">
+            </div>
+            <div class="award">
+              <div class="tag">Award</div>
+              <h3 class="awardTitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
+              <p class="awardP">Lorem ipsum dolor sit.</p>
+              <div class="cardFooter">
+                <div class="client">
+                  <div class="head">CLIENT</div>
+                  <div class="clientDetail">ACT Government</div>
+                </div>
+                <div class="status">
+                  <div class="head">STATUS</div>
+                  <div class="statusDetail">Completed 2017</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cardChild cardDetail">
+            <div class="awardPic">
+              <img src="https://picsum.photos/300/300/?random=8" alt="awardPic">
+            </div>
+            <div class="award">
+              <div class="tag">Award</div>
+              <h3 class="awardTitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
+              <p class="awardP">Lorem ipsum dolor sit.</p>
+              <div class="cardFooter">
+                <div class="client">
+                  <div class="head">CLIENT</div>
+                  <div class="clientDetail">ACT Government</div>
+                </div>
+                <div class="status">
+                  <div class="head">STATUS</div>
+                  <div class="statusDetail">Completed 2017</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card second">
+          <div class="cardChild cardTitle">
+            <h2>Award Winning civil contractors that government</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus modi.</p>
+            <div class="arrow"></div>
+          </div>
+          <div class="cardChild cardTitle">
+            <h2>Award Winning civil contractors that government</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus modi.</p>
+            <div class="arrow"></div>
+          </div>
+          <div class="cardChild cardTitle">
+            <h2>Award Winning civil contractors that government</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus modi.</p>
+            <div class="arrow"></div>
+          </div>
+          <div class="cardChild cardDetail one">
+            <div class="awardPic">
+              <img src="https://picsum.photos/300/300/?random=10" alt="awardPic">
+            </div>
+            <div class="award">
+              <div class="tag">Award</div>
+              <h3 class="awardTitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
+              <p class="awardP">Lorem ipsum dolor sit.</p>
+              <div class="cardFooter">
+                <div class="client">
+                  <div class="head">CLIENT</div>
+                  <div class="clientDetail">ACT Government</div>
+                </div>
+                <div class="status">
+                  <div class="head">STATUS</div>
+                  <div class="statusDetail">Completed 2017</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cardChild cardDetail middle">
+            <div class="awardPic">
+              <img src="https://picsum.photos/300/300/?random=9" alt="awardPic">
+            </div>
+            <div class="award">
+              <div class="tag">Award</div>
+              <h3 class="awardTitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
+              <p class="awardP">Lorem ipsum dolor sit.</p>
+              <div class="cardFooter">
+                <div class="client">
+                  <div class="head">CLIENT</div>
+                  <div class="clientDetail">ACT Government</div>
+                </div>
+                <div class="status">
+                  <div class="head">STATUS</div>
+                  <div class="statusDetail">Completed 2017</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cardChild cardDetail">
+            <div class="awardPic">
+              <img src="https://picsum.photos/300/300/?random=8" alt="awardPic">
+            </div>
+            <div class="award">
+              <div class="tag">Award</div>
+              <h3 class="awardTitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
+              <p class="awardP">Lorem ipsum dolor sit.</p>
+              <div class="cardFooter">
+                <div class="client">
+                  <div class="head">CLIENT</div>
+                  <div class="clientDetail">ACT Government</div>
+                </div>
+                <div class="status">
+                  <div class="head">STATUS</div>
+                  <div class="statusDetail">Completed 2017</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card third">
+          <div class="cardChild cardTitle">
+            <h2>Award Winning civil contractors that government</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus modi.</p>
+            <div class="arrow"></div>
+          </div>
+          <div class="cardChild cardTitle">
+            <h2>Award Winning civil contractors that government</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus modi.</p>
+            <div class="arrow"></div>
+          </div>
+          <div class="cardChild cardTitle">
+            <h2>Award Winning civil contractors that government</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus modi.</p>
+            <div class="arrow"></div>
+          </div>
+          <div class="cardChild cardDetail one">
+            <div class="awardPic">
+              <img src="https://picsum.photos/300/300/?random=10" alt="awardPic">
+            </div>
+            <div class="award">
+              <div class="tag">Award</div>
+              <h3 class="awardTitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
+              <p class="awardP">Lorem ipsum dolor sit.</p>
+              <div class="cardFooter">
+                <div class="client">
+                  <div class="head">CLIENT</div>
+                  <div class="clientDetail">ACT Government</div>
+                </div>
+                <div class="status">
+                  <div class="head">STATUS</div>
+                  <div class="statusDetail">Completed 2017</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cardChild cardDetail middle">
+            <div class="awardPic">
+              <img src="https://picsum.photos/300/300/?random=9" alt="awardPic">
+            </div>
+            <div class="award">
+              <div class="tag">Award</div>
+              <h3 class="awardTitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
+              <p class="awardP">Lorem ipsum dolor sit.</p>
+              <div class="cardFooter">
+                <div class="client">
+                  <div class="head">CLIENT</div>
+                  <div class="clientDetail">ACT Government</div>
+                </div>
+                <div class="status">
+                  <div class="head">STATUS</div>
+                  <div class="statusDetail">Completed 2017</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cardChild cardDetail">
+            <div class="awardPic">
+              <img src="https://picsum.photos/300/300/?random=8" alt="awardPic">
+            </div>
+            <div class="award">
+              <div class="tag">Award</div>
+              <h3 class="awardTitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
+              <p class="awardP">Lorem ipsum dolor sit.</p>
+              <div class="cardFooter">
+                <div class="client">
+                  <div class="head">CLIENT</div>
+                  <div class="clientDetail">ACT Government</div>
+                </div>
+                <div class="status">
+                  <div class="head">STATUS</div>
+                  <div class="statusDetail">Completed 2017</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card forth">
+          <div class="cardChild cardTitle">
+            <h2>Award Winning civil contractors that government</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus modi.</p>
+            <div class="arrow"></div>
+          </div>
+          <div class="cardChild cardTitle">
+            <h2>Award Winning civil contractors that government</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus modi.</p>
+            <div class="arrow"></div>
+          </div>
+          <div class="cardChild cardTitle">
+            <h2>Award Winning civil contractors that government</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus modi.</p>
+            <div class="arrow"></div>
+          </div>
+          <div class="cardChild cardDetail one">
+            <div class="awardPic">
+              <img src="https://picsum.photos/300/300/?random=10" alt="awardPic">
+            </div>
+            <div class="award">
+              <div class="tag">Award</div>
+              <h3 class="awardTitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
+              <p class="awardP">Lorem ipsum dolor sit.</p>
+              <div class="cardFooter">
+                <div class="client">
+                  <div class="head">CLIENT</div>
+                  <div class="clientDetail">ACT Government</div>
+                </div>
+                <div class="status">
+                  <div class="head">STATUS</div>
+                  <div class="statusDetail">Completed 2017</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cardChild cardDetail middle">
+            <div class="awardPic">
+              <img src="https://picsum.photos/300/300/?random=9" alt="awardPic">
+            </div>
+            <div class="award">
+              <div class="tag">Award</div>
+              <h3 class="awardTitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
+              <p class="awardP">Lorem ipsum dolor sit.</p>
+              <div class="cardFooter">
+                <div class="client">
+                  <div class="head">CLIENT</div>
+                  <div class="clientDetail">ACT Government</div>
+                </div>
+                <div class="status">
+                  <div class="head">STATUS</div>
+                  <div class="statusDetail">Completed 2017</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cardChild cardDetail">
+            <div class="awardPic">
+              <img src="https://picsum.photos/300/300/?random=8" alt="awardPic">
+            </div>
+            <div class="award">
+              <div class="tag">Award</div>
+              <h3 class="awardTitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h3>
+              <p class="awardP">Lorem ipsum dolor sit.</p>
+              <div class="cardFooter">
+                <div class="client">
+                  <div class="head">CLIENT</div>
+                  <div class="clientDetail">ACT Government</div>
+                </div>
+                <div class="status">
+                  <div class="head">STATUS</div>
+                  <div class="statusDetail">Completed 2017</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="btn">
+          <button class="more">More</button>
+        </div>
+      </div>
+    </section>
+    <footer class="mainFooter">
+      <div class="webFooter">
+        <div class="logo">
+          <a href="#">
+            <img src="img/logo.svg">
+          </a>
+        </div>
+        <nav>
+          <ul class="nav">
+            <li>
+              <a href="#">About</a>
+            </li>
+            <li>
+              <a href="#">Website</a>
+            </li>
+            <li>
+              <a href="#">Branding</a>
+            </li>
+          </ul>
+          <div class="contactDetail">
+            <div class="phone">T. 02-2885-8586</div>
+            <div class="email">E. info@blockstudio.tw</div>
+            <div class="address">3F., No2, Ln.80, Sec.4, Chengde.Rd., Shilin Dist., Taipei City 111, Taiwan</div>
+          </div>
+        </nav>
+        <div class="social">
+          <a href="#"><img src="img/facebook.svg" alt="facebook"></a>
+          <a href="#"><img src="img/instagram.svg" alt="instagram"></a>
+          <a href="#"><img src="img/youtube.svg" alt="youtube"></a>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script>
+    new Vue({
+      el: '#blockstudio',
+      data() {
+        return {
+          youtube: false,
+          myWidth: window.innerWidth,
+          carouselName: 'carousel-next',
+          carousels: [
+            {
+              img: 'https://picsum.photos/800/800/?random=1',
+              href: "#",
+              h1: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.',
+              p: 'Architecto fuga nostrum vitae quamillo dignissimos eveniet? Placeat ratione aut corrupti!',
+            },
+            {
+              img: 'https://picsum.photos/800/800/?random=2',
+              href: "#",
+              h1: 'Iusto mollitia facilis doloremque voluptatibus sint.',
+              p: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam, temporibus voluptatemofficia rem provident odio obcaecati vitae optio quas velit?',
+            },
+            {
+              img: 'https://picsum.photos/800/800/?random=3',
+              href: "#",
+              h1: 'Harum animi sunt magnam magni eveniet quam aliquam quis sequi!',
+              p: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam perspiciatis idveritatis cum, nostrum enim ipsa nobis ad. Possimus, aut?',
+            }
+          ],
+          len: 0,
+          show: 0,
+          xDown: null, // for swiper
+          yDown: null, // for swiper
+          autoplay: true, // 是否自動輪播
+          timer: null, // auto play
+          timerDelay: 3000, // 自動輪播間隔秒數
+          toggleTimer: true, // pause auto play
+          minHeight: 0, // 抓最小高度
+          arrows: false, // 是否要有箭頭，預設 true
+          dots: true // 是否要有小點，預設 true
+        }
+      },
+      methods: {
+        hb() {
+          let place = $(".hbNav").css("right");
+          if (place < "0px") {
+            $(".hbNav").animate(
+              {
+                right: 0,
+              },
+              1200,
+            );
+          } else {
+            $("nav").animate(
+              {
+                right: "-100%",
+              },
+              1200,
+            );
+          }
+        },
+        playYoutube() {
+          this.youtube = true;
+        },
+        closeYoutube() {
+          this.youtube = false;
+        },
+        toNext() {
+          this.carouselName = 'carousel-next';
+          this.show + 1 >= this.len ? this.show = 0 : this.show = this.show + 1;
+        },
+        toPrev() {
+          this.carouselName = 'carousel-prev';
+          this.show - 1 < 0 ? this.show = this.len - 1 : this.show = this.show - 1;
+        },
+        // swiper event(for mobile)
+        touchStart(e) {
+          this.xDown = e.touches[0].clientX;
+          this.yDown = e.touches[0].clientY;
+        },
+        touchMove(e) {
+          const _this = this;
+          if (!this.xDown || !this.yDown) { return; }
+
+          let xUp = e.touches[0].clientX;
+          let yUp = e.touches[0].clientY;
+
+          let xDiff = this.xDown - xUp;
+          let yDiff = this.yDown - yUp;
+
+          if (Math.abs(xDiff) > Math.abs(yDiff)) {
+            xDiff > 0 ? _this.toNext() : _this.toPrev();
+          }
+          this.xDown = null;
+          this.yDown = null;
+        },
+        // 自動輪播
+        autoPlay() {
+          setInterval(() => {
+            if (this.toggleTimer) this.toNext();
+          }, this.timerDelay, 'easeIn');
+        },
+        ani() {
+          var tl = new TimelineMax({ onUpdate: updatePercentage });
+          var tl2 = new TimelineMax();
+          const controller = new ScrollMagic.Controller();
+          //first-card
+          tl.from(".cardTitle:first-child", 1, { x: -500, opacity: 0 });
+          tl.from(".cardTitle:nth-child(2)", 1, { y: 500, opacity: 0 });
+          tl.from(".cardTitle:nth-child(3)", 1, { x: 500, opacity: 0 });
+          tl.from(".one", 0.5, { x: 500, opacity: 0 });
+          tl.from(".middle", 0.5, { y: 500, opacity: 0 });
+          tl.from(".cardDetail:last-child", 0.5, { x: -500, opacity: 0 });
+
+          gsap.to('itemContent', {
+            keyframes: [
+              { duration: 1, x: 100, },
+              { duration: 1, y: 100 },
+              { duration: 1, rotation: 360 },
+            ]
+          });
+
+          const scene = new ScrollMagic.Scene({
+            triggerElement: ".video",
+            triggerHook: "onLeave",
+            duration: "50%",
+          })
+            .setPin(".video")
+            .setTween(tl)
+            .addTo(controller);
+
+          const scene2 = new ScrollMagic.Scene({
+            triggerElement: ".video",
+          })
+            .setTween(tl2)
+            .addTo(controller);
+
+          function updatePercentage() {
+            tl.progress();
+          }
+        }
+      },
+      mounted() {
+        this.len = this.carousels.length;
+        if (this.autoplay) this.autoPlay();
+        const data = this.$refs.carousel.dataset;
+        this.autoplay = data.auto == 'true';
+        this.timerDelay = Number(data.delay) || 3000;
+        this.dots = data.dots == 'true';
+
+        window.addEventListener('load', () => {
+          this.minHeight = this.$refs.carousel.offsetHeight + 'px';
+        });
+        this.$nextTick(this.ani);
+      },
+    })
+  </script>
+</body>
+
+</html>
